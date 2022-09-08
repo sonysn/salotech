@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:salotech/Widgets/custombuttomnavigation.dart';
+import 'package:salotech/Widgets/custom_bottom_navigation.dart';
+import 'package:salotech/Widgets/savings_card.dart';
 import 'package:salotech/functions/time.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,38 +52,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: Card(
-                  color: Colors.blue[600],
-                  child: SizedBox(
-                      height: 120,
-                      width: 400,
-                      child: Container(
-                          margin: const EdgeInsets.all(25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Your Savings',
-                                  style: TextStyle(color: Colors.white)),
-                              Container(
-                                  margin: const EdgeInsets.only(top: 15),
-                                  child: const Text(
-                                    'Amount saved',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.white),
-                                  ))
-                            ],
-                          ))),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                    bottom: Radius.circular(20),
-                  )),
-                ),
-              ),
+              const SavingsCard(),
               Container(
                   margin: const EdgeInsets.only(top: 60, bottom: 10),
                   child: const Text(
@@ -382,7 +352,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        const CustomBottomNav() // From Widgets
+        CustomBottomNav(5) // From Widgets
       ]),
       // bottomNavigationBar: BottomNavigationBar(
       //     backgroundColor: Colors.blue[200],
