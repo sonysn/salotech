@@ -16,7 +16,7 @@ class _SavingsCardState extends State<SavingsCard> {
         color: Colors.blue[600],
         child: SizedBox(
             height: 120,
-            width: 400,
+            width: MediaQuery.of(context).size.width,
             child: Container(
                 margin: const EdgeInsets.all(25),
                 child: Column(

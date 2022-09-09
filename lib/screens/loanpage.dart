@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
+import 'package:salotech/Widgets/payback_loan_popup.dart';
 import 'package:salotech/Widgets/savings_card.dart';
 
 class LoanPage extends StatefulWidget {
@@ -27,10 +29,10 @@ class _LoanPageState extends State<LoanPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: 200,
-                        width: 400,
-                        child: Card(
+                        width: MediaQuery.of(context).size.width,
+                        child: const Card(
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Center(
@@ -50,9 +52,9 @@ class _LoanPageState extends State<LoanPage> {
                       ),
                       ElevatedButton(
                           onPressed: () {},
-                          child: const SizedBox(
-                              width: 250,
-                              child: Center(child: Text('Request Loan'))),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.7,
+                              child: const Center(child: Text('Request Loan'))),
                           style: ElevatedButton.styleFrom(
                               primary: Colors.blue[600],
                               shape: const RoundedRectangleBorder(
@@ -65,10 +67,26 @@ class _LoanPageState extends State<LoanPage> {
                         height: 50,
                       ),
                       ElevatedButton(
-                          onPressed: () {},
-                          child: const SizedBox(
-                              width: 250,
-                              child: Center(child: Text('Payback Loan'))),
+                          onPressed: () {
+                            setState(() {
+                              showModalBottomSheet(
+                                //Modal bottom sheet controls the menu that shows up from the bottom of the screen
+                                isScrollControlled: true,
+                                backgroundColor: Colors.blue[600],
+                                context: context,
+                                builder: (context) {
+                                  return const PayBackLoanPopUp();
+                                },
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                    )),
+                              );
+                            });
+                          },
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.7,
+                              child: const Center(child: Text('Payback Loan'))),
                           style: ElevatedButton.styleFrom(
                               primary: Colors.blue[600],
                               shape: const RoundedRectangleBorder(
@@ -83,7 +101,7 @@ class _LoanPageState extends State<LoanPage> {
               ],
             ),
           ),
-          CustomBottomNav(115)
+          CustomBottomNav(115),
         ],
       ),
     );
