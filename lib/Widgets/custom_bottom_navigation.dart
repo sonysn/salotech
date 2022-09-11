@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:salotech/screens/homepage.dart';
 import 'package:salotech/screens/loanpage.dart';
+import 'package:salotech/screens/savingspage.dart';
 
 class CustomBottomNav extends StatefulWidget {
   double marginValue;
+
   CustomBottomNav(this.marginValue, {Key? key}) : super(key: key);
+
   //Created a double called marginValue to manipulate the MARGIN of this widget as a positional argument
 
   @override
@@ -11,7 +15,6 @@ class CustomBottomNav extends StatefulWidget {
 }
 
 class _CustomBottomNavState extends State<CustomBottomNav> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +24,11 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                return HomePage();
+              }));
+            },
             icon: const Icon(
               Icons.home,
               color: Colors.white,
@@ -32,7 +39,14 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
             ),
           ),
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return SavingsPage();
+                  }));
+                });
+              },
               icon: const Icon(
                 Icons.account_balance_wallet_rounded,
                 color: Colors.white,

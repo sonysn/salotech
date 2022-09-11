@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PayBackLoanPopUp extends StatefulWidget {
-  const PayBackLoanPopUp({Key? key}) : super(key: key);
+class SaveMoney extends StatefulWidget {
+  const SaveMoney({Key? key}) : super(key: key);
 
   @override
-  State<PayBackLoanPopUp> createState() => _PayBackLoanPopUpState();
+  State<SaveMoney> createState() => _SaveMoneyState();
 }
 
-class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
+class _SaveMoneyState extends State<SaveMoney> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +15,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
       child: Container(
         height: MediaQuery.of(context).size.height / 1.85,
         padding:
-            const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
+        const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
         child: ListView(
           children: [
             Column(
@@ -23,17 +23,17 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
               children: [
                 Center(
                     child: Card(
-                  elevation: 0,
-                  color: Colors.white,
-                  child: SizedBox(
-                    height: 7,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                  ),
-                )),
+                      elevation: 0,
+                      color: Colors.white,
+                      child: SizedBox(
+                        height: 7,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                      ),
+                    )),
                 Container(
                     margin: const EdgeInsets.only(bottom: 20, top: 20),
                     child: const Text(
-                      'Payback Loan',
+                      'Quick Save',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -42,7 +42,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 Container(
                   margin: const EdgeInsets.only(bottom: 20),
                   child: const Text(
-                    'Enter the amount you wish to payback and select mode of payment',
+                    'Enter the amount you wish to save and select mode of payment',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -124,4 +124,3 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
     );
   }
 }
-

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PayBackLoanPopUp extends StatefulWidget {
-  const PayBackLoanPopUp({Key? key}) : super(key: key);
+class RequestLoanPopUp extends StatefulWidget {
+  const RequestLoanPopUp({Key? key}) : super(key: key);
 
   @override
-  State<PayBackLoanPopUp> createState() => _PayBackLoanPopUpState();
+  State<RequestLoanPopUp> createState() => _RequestLoanPopUpState();
 }
 
-class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
+class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
-        height: MediaQuery.of(context).size.height / 1.85,
+        height: MediaQuery.of(context).size.height / 1.57,
         padding:
             const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
         child: ListView(
@@ -33,7 +33,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 Container(
                     margin: const EdgeInsets.only(bottom: 20, top: 20),
                     child: const Text(
-                      'Payback Loan',
+                      'Loan Money',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -42,7 +42,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 Container(
                   margin: const EdgeInsets.only(bottom: 20),
                   child: const Text(
-                    'Enter the amount you wish to payback and select mode of payment',
+                    'Enter the amount you wish to loan and fill in your details accurately',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -76,7 +76,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                   ),
                 ),
                 const Text(
-                  'Mode',
+                  'Description',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -84,10 +84,14 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: DropdownButtonFormField(
-                    items: List.empty(),
-                    decoration: const InputDecoration(
-                        hintText: 'Select Mode of Payment',
+                  child: const TextField(
+                    //controller: phoneNumber,
+                    maxLines: 4,
+                    maxLength: 120,
+                    cursorColor: Colors.white,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        hintText: 'Reason For the loan?',
                         contentPadding: EdgeInsets.all(20),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -105,7 +109,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                       child: SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width / 2,
-                        child: const Center(child: Text('Proceed')),
+                        child: const Center(child: Text('Submit Request')),
                       ),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.blue[200],
@@ -124,4 +128,3 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
     );
   }
 }
-

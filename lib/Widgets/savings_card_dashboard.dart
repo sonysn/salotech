@@ -10,7 +10,7 @@ class SavingsCard extends StatefulWidget {
 class _SavingsCardState extends State<SavingsCard> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Card(
         color: Colors.blue[600],
@@ -37,9 +37,9 @@ class _SavingsCardState extends State<SavingsCard> {
                 ))),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-              bottom: Radius.circular(20),
-            )),
+          top: Radius.circular(20),
+          bottom: Radius.circular(20),
+        )),
       ),
     );
   }

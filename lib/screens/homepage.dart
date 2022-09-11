@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
-import 'package:salotech/Widgets/savings_card.dart';
+import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/functions/time.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getTime();
+    getTimeString();
     //Defined in lib/functions/time.dart
   }
 
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                getTime(),
+                getTimeString(),
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
               ),
@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Icon(
+                    //getTimeIcon(),//TODO
                     Icons.wb_sunny,
                     color: Colors.yellow,
                   )

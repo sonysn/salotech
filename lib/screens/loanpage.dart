@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/payback_loan_popup.dart';
-import 'package:salotech/Widgets/savings_card.dart';
+import 'package:salotech/Widgets/request_loan_popup.dart';
+import 'package:salotech/Widgets/savings_card_dashboard.dart';
 
 class LoanPage extends StatefulWidget {
   const LoanPage({Key? key}) : super(key: key);
@@ -51,7 +52,23 @@ class _LoanPageState extends State<LoanPage> {
                         height: 70,
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              showModalBottomSheet(
+                                //Modal bottom sheet controls the menu that shows up from the bottom of the screen TODO
+                                isScrollControlled: true,
+                                backgroundColor: Colors.blue[600],
+                                context: context,
+                                builder: (context) {
+                                  return const RequestLoanPopUp();
+                                },
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                )),
+                              );
+                            });
+                          },
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width / 1.7,
                               child: const Center(child: Text('Request Loan'))),
@@ -70,7 +87,7 @@ class _LoanPageState extends State<LoanPage> {
                           onPressed: () {
                             setState(() {
                               showModalBottomSheet(
-                                //Modal bottom sheet controls the menu that shows up from the bottom of the screen
+                                //Modal bottom sheet controls the menu that shows up from the bottom of the screen TODO
                                 isScrollControlled: true,
                                 backgroundColor: Colors.blue[600],
                                 context: context,
@@ -79,8 +96,8 @@ class _LoanPageState extends State<LoanPage> {
                                 },
                                 shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                    )),
+                                  top: Radius.circular(20),
+                                )),
                               );
                             });
                           },
