@@ -3,6 +3,8 @@ import 'package:salotech/screens/homepage.dart';
 import 'package:salotech/screens/loanpage.dart';
 import 'package:salotech/screens/savingspage.dart';
 
+import '../screens/profilepage.dart';
+
 class CustomBottomNav extends StatefulWidget {
   double marginValue;
 
@@ -73,7 +75,13 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                 style: TextStyle(color: Colors.white),
               )),
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                    return ProfilePage();
+                  }));
+                });
+              },
               icon: const Icon(
                 Icons.account_circle,
                 color: Colors.white,

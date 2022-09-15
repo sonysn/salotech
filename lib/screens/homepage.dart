@@ -4,6 +4,8 @@ import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/functions/time.dart';
 
+import '../database/dbhelper.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -18,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getTimeString();
     //Defined in lib/functions/time.dart
+    //TODO readDB();
   }
 
   @override
