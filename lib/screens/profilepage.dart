@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:salotech/Widgets/contact_support_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 
@@ -59,28 +60,47 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 30,
                       ),
-                      SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Card(
-                            child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: ListTile(
-                                    leading: Icon(Icons.headset_mic_rounded),
-                                    title: Text(
-                                      'Contact Support',
-                                      style: TextStyle(fontSize: 20),
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            showModalBottomSheet(
+                              //Modal bottom sheet controls the menu that shows up from the bottom of the screen TODO
+                              isScrollControlled: true,
+                              backgroundColor: Colors.blue[600],
+                              context: context,
+                              builder: (context) {
+                                return const ContactSupport();
+                              },
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  )),
+                            );
+                          });
+                        },
+                        child: SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Card(
+                              child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: ListTile(
+                                      leading: Icon(Icons.headset_mic_rounded),
+                                      title: Text(
+                                        'Contact Support',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      trailing:
+                                          Icon(Icons.arrow_forward_ios_rounded),
                                     ),
-                                    trailing:
-                                        Icon(Icons.arrow_forward_ios_rounded),
-                                  ),
-                                )),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20),
-                              bottom: Radius.circular(20),
-                            ))),
+                                  )),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                                bottom: Radius.circular(20),
+                              ))),
+                        ),
                       ),
                     ],
                   ),
