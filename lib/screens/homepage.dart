@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getTimeString();
     //Defined in lib/functions/time.dart
+    dbController();
     //TODO readDB();
   }
 
