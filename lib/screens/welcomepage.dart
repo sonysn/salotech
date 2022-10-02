@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salotech/screens/login.dart';
 import 'package:salotech/screens/register.dart';
-
+//The first screen of the application
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 

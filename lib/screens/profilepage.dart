@@ -4,6 +4,8 @@ import 'package:salotech/Widgets/contact_support_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 
+//This is where the user profile page us found
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -126,6 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
+          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
           CustomBottomNav(105)
         ],
       ),

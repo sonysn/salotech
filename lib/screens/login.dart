@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salotech/screens/homepage.dart';
+//Ths is the login page
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

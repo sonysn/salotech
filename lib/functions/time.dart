@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+//Returns a String based on the current time.
 String getTimeString() {
   final now = DateTime.now();
   int hour = now.hour;
@@ -14,6 +16,7 @@ String getTimeString() {
   return n;
 }
 
+//Returns an Icon based on the current time, Used for the "Good morning" message and the icon beside it.
 IconData getTimeIcon() {
   final now = DateTime.now();
   int hour = now.hour;

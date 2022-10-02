@@ -1,5 +1,6 @@
-const envHost = "127.0.0.1";
+//Database environment variables
+const envHost = "192.168.100.43";
 const envPort = 3306;
-const envUser = "root";
+const envUser = "newroot";
 const envPassword = "";
-const envDB = "testDB";
+const envDB = "testdb";

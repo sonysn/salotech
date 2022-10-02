@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//This is the register page
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -8,6 +8,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController fullName = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
 

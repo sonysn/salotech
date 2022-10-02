@@ -3,6 +3,8 @@ import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/save_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 
+//This is the page that handles the saving deposit
+
 class SavingsPage extends StatefulWidget {
   const SavingsPage({Key? key}) : super(key: key);
 
@@ -135,6 +137,7 @@ class _SavingsPageState extends State<SavingsPage> {
               ],
             ),
           ),
+          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
           CustomBottomNav(215),
         ],
       ),

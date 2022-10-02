@@ -5,6 +5,7 @@ import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/functions/time.dart';
 
 import '../database/dbhelper.dart';
+//This is the very first page you see once you are past the login
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //creates a blue a background colour
       backgroundColor: Colors.blue[200],
       body: ListView(children: [
         Container(
@@ -36,6 +38,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                //from the time.dart file
                 getTimeString(),
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
@@ -357,21 +360,9 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        CustomBottomNav(5) // From Widgets
+        //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
+        CustomBottomNav(5)
       ]),
-      // bottomNavigationBar: BottomNavigationBar(
-      //     backgroundColor: Colors.blue[200],
-      //     selectedItemColor: Colors.blue[600],
-      //     elevation: 20,
-      //     items: const [
-      //       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.account_balance_wallet_rounded),
-      //           label: "Savings"),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.monetization_on), label: "Loan"),
-      //       // BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Profile")
-      //     ]),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/payback_loan_popup.dart';
 import 'package:salotech/Widgets/request_loan_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
+//The request and payback loan page
 
 class LoanPage extends StatefulWidget {
   const LoanPage({Key? key}) : super(key: key);
@@ -118,6 +119,7 @@ class _LoanPageState extends State<LoanPage> {
               ],
             ),
           ),
+          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
           CustomBottomNav(115),
         ],
       ),
