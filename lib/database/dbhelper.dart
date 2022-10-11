@@ -1,18 +1,13 @@
-import 'dart:async';
-import 'package:mysql1/mysql1.dart';
-import 'db_environment.dart';
+import 'dart:developer';
+import 'package:salotech/database/db_environment.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
-
-// Function to connect to the database
-var settings  = ConnectionSettings(
-    host: envHost,
-    port: envPort,
-    user: envUser,
-    password: envPassword,
-    db: envDB,
-);
-
-Future dbController() async{
-      final conn = await MySqlConnection.connect(settings);
-      print("${settings.port} number");
+class MongoDatabase{
+  static var db, userCollection;
+  static connect() async {
+    db = await Db.create(envURI);
+    await db.open();
+    inspect(db);
+    userCollection = db.collection(envCollection);
+  }
 }

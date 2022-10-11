@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:salotech/screens/WelcomePage.dart';
 
-void main() {
+import 'database/dbhelper.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
   runApp(const MaterialApp(
       home: SApp()));
 }
