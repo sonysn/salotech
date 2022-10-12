@@ -1,7 +1,6 @@
 const User = require("../models/user");
 
 exports.signup = async (req, res) => {
-    console.log(req.body.firstName);
     const userExists = await User.findOne({ accountNumber: req.body.accountNumber });
     console.log(userExists);
     if(userExists) 

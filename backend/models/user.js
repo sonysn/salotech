@@ -36,8 +36,7 @@
         default: Date.now
       },
       updated: Date
-  },
-  { collection: 'us' }
+  }
   )
 
   module.exports = mongoose.model('User', userSchema)

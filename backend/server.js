@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -16,8 +18,12 @@ mongoose.connection.on('error', err => {
 const authRoutes = require('./routes/auth');
 
 //middleware
+app.use(morgan('dev'));
+app.use(bodyParser.json());
 app.use('/', authRoutes);
 
+
+//debug code
 app.get('/', (req, res) => {
                  res.send('Hello world from nodejs')
              });
