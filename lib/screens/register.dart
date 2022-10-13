@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salotech/Widgets/snackbar.dart';
+import 'package:salotech/database/dbhelper.dart';
 //This is the register page
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -266,10 +268,8 @@ class _RegisterState extends State<Register> {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (BuildContext context) {
-                        //       return const Register();
-                        //     }));
+                        signUp(firstname.text, lastname.text, phoneNumber.text, password.text, accountNumber.text, homeAddress.text);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       child: const SizedBox(
                         child: Center(child: Text('Sign Up')),
