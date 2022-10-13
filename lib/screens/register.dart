@@ -9,8 +9,12 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
-  TextEditingController fullName = TextEditingController();
+  TextEditingController firstname = TextEditingController();
+  TextEditingController lastname = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController accountNumber = TextEditingController();
+  TextEditingController homeAddress = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class _RegisterState extends State<Register> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 150),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -36,9 +40,14 @@ class _RegisterState extends State<Register> {
                       )),
                 ),
                 const Padding(
+                  padding: EdgeInsets.only(left: 12, bottom: 10),
+                  child: Text("Required marked with *"),
+                ),
+                //firstname input
+                const Padding(
                   padding: EdgeInsets.only(left: 12),
                   child: Text(
-                    'Name',
+                    'First name *',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 27,
@@ -46,13 +55,12 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(12),
                     child: Column(
                       children: [
                         //TextField for name
                         TextField(
-                          controller: fullName,
+                          controller: firstname,
                           cursorColor: Colors.white,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
@@ -71,11 +79,11 @@ class _RegisterState extends State<Register> {
                         ),
                       ],
                     )),
-                const SizedBox(height: 60),
+                //lastname input
                 const Padding(
                   padding: EdgeInsets.only(left: 12),
                   child: Text(
-                    'Phone Number',
+                    'Last name *',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 27,
@@ -83,7 +91,44 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        //TextField for name
+                        TextField(
+                          controller: lastname,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                              hintText: 'Enter your Full Name',
+                              contentPadding: EdgeInsets.all(20),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    )),
+                // const SizedBox(height: 60),
+                // const SizedBox(height: 60),
+                //phone number input
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Text(
+                    'Phone Number *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 27,
+                        color: Colors.white),
+                  ),
+                ),
+                Container(
                     padding: const EdgeInsets.all(12),
                     child: Column(
                       children: [
@@ -108,7 +153,116 @@ class _RegisterState extends State<Register> {
                         ),
                       ],
                     )),
-                const SizedBox(height: 60),
+                //password input
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Text(
+                    'Password *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 27,
+                        color: Colors.white),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        //TextField for name
+                        TextField(
+                          controller: password,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                              hintText: 'Enter your phone number as password',
+                              contentPadding: EdgeInsets.all(20),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    )),
+                //account number input
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Text(
+                    'Account Number *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 27,
+                        color: Colors.white),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        //TextField for name
+                        TextField(
+                          controller: accountNumber,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                              hintText: 'Enter your account number',
+                              contentPadding: EdgeInsets.all(20),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    )),
+                //home address input
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Text(
+                    'Home Address',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 27,
+                        color: Colors.white),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        //TextField for name
+                        TextField(
+                          controller: homeAddress,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                              hintText: 'Enter your account number',
+                              contentPadding: EdgeInsets.all(20),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    )),
+                const SizedBox(height: 10),
+                //sign up button
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
@@ -130,7 +284,8 @@ class _RegisterState extends State<Register> {
                               bottom: Radius.circular(15),
                             ),
                           ))),
-                )
+                ),
+                const SizedBox(height: 10)
               ],
             ),
           ),

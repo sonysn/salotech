@@ -7,3 +7,4 @@ Installed Services:
 4 - moongoose
 5 - morgan
 6 - body-parser
+7 - express-validator
