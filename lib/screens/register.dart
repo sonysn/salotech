@@ -22,11 +22,20 @@ class _RegisterState extends State<Register> {
         password.text.toUpperCase(),
         accountNumber.text.toUpperCase(),
         homeAddress.text.toUpperCase());
-    setState(() {
-      responder = res['error'];
-    });
-    print(res['error']);
-    print("$responder + hellooo");
+    //use status code to display responses
+    if (res[1] == 200){
+      setState(() {
+        responder = res[0]['message'];
+      });
+    }
+    else {
+      setState(() {
+        responder = res[0]['error'];
+      });
+    }
+    print(res);
+    print(responder);
+    //print("$responder + hellooo");
   }
 
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
@@ -36,7 +45,7 @@ class _RegisterState extends State<Register> {
   TextEditingController password = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
   TextEditingController homeAddress = TextEditingController();
-  String responder = "";
+  dynamic responder;
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +298,17 @@ class _RegisterState extends State<Register> {
                   child: ElevatedButton(
                       onPressed: () {
                         serverResponse();
+                        // _displaySnackBar(BuildContext context) async {
+                        //   final snackBar = SnackBar(
+                        //       behavior: SnackBarBehavior.floating,
+                        //       content: Text(responder));
+                        //   await Future.delayed(const Duration(seconds: 1));
+                        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        // }
+                        // _displaySnackBar(context);
+                        // setState(() {
+                        //   _displaySnackBar(context);
+                        // });
                         final snackBar = SnackBar(
                             behavior: SnackBarBehavior.floating,
                             content: Text(responder));

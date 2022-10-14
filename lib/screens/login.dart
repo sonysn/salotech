@@ -11,13 +11,33 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   //function to call signIn function and return a dynamic response
-  void serverResponse() async{
-    final res = await signIn(accountNumber.text.toUpperCase(), password.text.toUpperCase());
-    print(res['error']);
+  void serverResponse() async {
+    final res = await signIn(
+        accountNumber.text.toUpperCase(), password.text.toUpperCase());
+    //use status code to display responses
+    if (res[1] == 200 && tokenData.isEmpty) {
+      //print(res[0]['token']);
+      setState(() {
+        isLoggedIn = true;
+        data = res[0];
+      });
+      print(data['token']);
+    } else {
+      //print(res[0]['error']);
+      setState(() {
+        isLoggedIn = false;
+        data = res[0]['error'];
+      });
+    }
+    //print(res);
+    print(isLoggedIn);
+    print(data);
   }
 
+  dynamic data;
+  String tokenData = "";
+  bool isLoggedIn = false;
   TextEditingController password = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
 
@@ -68,12 +88,12 @@ class _LoginState extends State<Login> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -103,12 +123,12 @@ class _LoginState extends State<Login> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -120,10 +140,19 @@ class _LoginState extends State<Login> {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (BuildContext context) {
-                        //   return const HomePage();
-                        // }));
+                        void nav() {
+                          if (isLoggedIn) {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return HomePage(
+                                  firstname: data['user']['firstName'],
+                                  accountNumber: data['user']['accountNumber']);
+                            }));
+                          }
+                        }
+
+                        nav();
+
                         serverResponse();
                       },
                       child: const SizedBox(

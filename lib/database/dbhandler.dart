@@ -21,11 +21,12 @@ Future<dynamic> signUp(
       headers: {"Content-Type": "application/json"}, body: body);
 
   final message = await jsonDecode(response.body);
+  //get status code
+  final statusCode = response.statusCode;
 
-  //print(message['error']);
   print("${response.statusCode}");
-  //print("${response.body}");
-  return message;
+  // print("${response.body}");
+  return [message, statusCode] ;
 }
 
 Future<dynamic> signIn(accountNo, password) async {
@@ -40,8 +41,9 @@ Future<dynamic> signIn(accountNo, password) async {
       headers: {"Content-Type": "application/json"}, body: body);
 
   final message = await jsonDecode(response.body);
+  final statusCode = response.statusCode;
 
   print("${response.statusCode}");
   // print("${response.body}");
-  return message;
+  return [message, statusCode] ;
 }

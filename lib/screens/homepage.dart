@@ -8,7 +8,10 @@ import '../database/dbhandler.dart';
 //This is the very first page you see once you are past the login
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String firstname, accountNumber;
+
+  const HomePage({Key? key, required this.firstname, required this.accountNumber})
+      : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,9 +23,6 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     getTimeString();
-    //Defined in lib/functions/time.dart
-    // dbController();
-    // //TODO readDB();
   }
 
   @override
@@ -44,13 +44,13 @@ class _HomePageState extends State<HomePage> {
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
               ),
               Row(
-                children: const [
+                children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 8, bottom: 8, right: 8),
+                    padding: const EdgeInsets.only(top: 8, bottom: 8, right: 8),
                     child: Text(
-                      'Name',
+                      widget.firstname,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Icon(

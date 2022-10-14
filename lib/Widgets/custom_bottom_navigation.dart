@@ -9,7 +9,6 @@ class CustomBottomNav extends StatefulWidget {
   double marginValue;
 
   CustomBottomNav(this.marginValue, {Key? key}) : super(key: key);
-
   //Created a double called marginValue to manipulate the MARGIN of this widget as a positional argument
 
   @override
@@ -27,9 +26,9 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
         children: [
           TextButton.icon(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                return HomePage();
-              }));
+              // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+              //   return HomePage();
+              // }));
             },
             icon: const Icon(
               Icons.home,
