@@ -5,9 +5,11 @@ exports.userSignupValidator = (req, res, next) => {
     req.check('lastName', "Last name is required!").notEmpty();
 
     //phone number not null and phone number length
-    req.check('phoneNumber', "Phone number is required!").notEmpty()
-    .isLength({
-        min: 11,
+    req.check('phoneNumber', "Phone number is required!").notEmpty();
+    req.check('phoneNumber', "Phone number is not complete!").isLength({
+        min: 11
+    });
+    req.check('phoneNumber', "Phone number is too long!").isLength({
         max: 11
     });
 

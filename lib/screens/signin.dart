@@ -12,15 +12,16 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   //function to call signIn function and return a dynamic response
-  void serverResponse() async {
+  void _serverResponse() async {
     final res = await signIn(
         accountNumber.text.toUpperCase(), password.text.toUpperCase());
     //use status code to display responses
-    if (res[1] == 200 && tokenData.isEmpty) {
+    if (res[1] == 200) {
       //print(res[0]['token']);
       setState(() {
         isLoggedIn = true;
         data = res[0];
+        loginMessage = res[0]['message'];
       });
       print(data['token']);
     } else {
@@ -28,6 +29,7 @@ class _LoginState extends State<Login> {
       setState(() {
         isLoggedIn = false;
         data = res[0]['error'];
+        loginMessage = data;
       });
     }
     //print(res);
@@ -35,9 +37,32 @@ class _LoginState extends State<Login> {
     print(data);
   }
 
+  //makes sure user is logged in before navigation to next screen
+  void _nav() async{
+    await Future.delayed(const Duration(seconds: 2));
+    if (isLoggedIn) {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) {
+            return HomePage(
+                firstname: data['user']['firstName'],
+                accountNumber: data['user']['accountNumber']);
+          }));
+    }
+  }
+
+  //this function delays snackbar creation time while populating 'responder' from the server
+  _displaySnackBarAfterServerResponse(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 1));
+    final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(loginMessage));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   dynamic data;
-  String tokenData = "";
+  //String tokenData = "";
   bool isLoggedIn = false;
+  String loginMessage = "";
   TextEditingController password = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
 
@@ -140,20 +165,9 @@ class _LoginState extends State<Login> {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        void nav() {
-                          if (isLoggedIn) {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return HomePage(
-                                  firstname: data['user']['firstName'],
-                                  accountNumber: data['user']['accountNumber']);
-                            }));
-                          }
-                        }
-
-                        nav();
-
-                        serverResponse();
+                        _serverResponse();
+                        _displaySnackBarAfterServerResponse(context);
+                        _nav();
                       },
                       child: const SizedBox(
                         child: Center(child: Text('Login')),

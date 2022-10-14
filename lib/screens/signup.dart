@@ -13,8 +13,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 
   //function to call signUp function and return a dynamic response
-  void serverResponse() async{
-    String ff;
+  void _serverResponse() async{
     final res = await signUp(
         firstname.text.toUpperCase(),
         lastname.text.toUpperCase(),
@@ -36,6 +35,15 @@ class _RegisterState extends State<Register> {
     print(res);
     print(responder);
     //print("$responder + hellooo");
+  }
+
+  //this function delays snackbar creation time while populating 'responder' from the server
+  _displaySnackBarAfterServerResponse(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 1));
+    final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(responder));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
@@ -297,22 +305,8 @@ class _RegisterState extends State<Register> {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        serverResponse();
-                        // _displaySnackBar(BuildContext context) async {
-                        //   final snackBar = SnackBar(
-                        //       behavior: SnackBarBehavior.floating,
-                        //       content: Text(responder));
-                        //   await Future.delayed(const Duration(seconds: 1));
-                        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // }
-                        // _displaySnackBar(context);
-                        // setState(() {
-                        //   _displaySnackBar(context);
-                        // });
-                        final snackBar = SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content: Text(responder));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        _serverResponse();
+                        _displaySnackBarAfterServerResponse(context);
                       },
                       child: const SizedBox(
                         child: Center(child: Text('Sign Up')),
