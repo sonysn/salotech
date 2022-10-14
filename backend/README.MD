@@ -8,3 +8,5 @@ Installed Services:
 5 - morgan
 6 - body-parser
 7 - express-validator
+8 - jsonwebtoken
+9 - cookie-parser

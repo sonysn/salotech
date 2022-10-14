@@ -4,7 +4,7 @@ import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/functions/time.dart';
 
-import '../database/dbhelper.dart';
+import '../database/dbhandler.dart';
 //This is the very first page you see once you are past the login
 
 class HomePage extends StatefulWidget {

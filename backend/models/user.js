@@ -36,7 +36,15 @@
         default: Date.now
       },
       updated: Date
+  });
+
+
+  //methods
+  userSchema.methods = {
+    authenticate: function (plainText) {
+      return plainText === this.password;
+    }
   }
-  )
+  
 
   module.exports = mongoose.model('User', userSchema)

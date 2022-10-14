@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/snackbar.dart';
-import 'package:salotech/database/dbhelper.dart';
+import 'package:salotech/database/dbhandler.dart';
+
 //This is the register page
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -10,6 +11,24 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+  //function to call signUp function and return a dynamic response
+  void serverResponse() async{
+    String ff;
+    final res = await signUp(
+        firstname.text.toUpperCase(),
+        lastname.text.toUpperCase(),
+        phoneNumber.text.toUpperCase(),
+        password.text.toUpperCase(),
+        accountNumber.text.toUpperCase(),
+        homeAddress.text.toUpperCase());
+    setState(() {
+      responder = res['error'];
+    });
+    print(res['error']);
+    print("$responder + hellooo");
+  }
+
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
@@ -17,6 +36,7 @@ class _RegisterState extends State<Register> {
   TextEditingController password = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
   TextEditingController homeAddress = TextEditingController();
+  String responder = "";
 
   @override
   Widget build(BuildContext context) {
@@ -106,12 +126,12 @@ class _RegisterState extends State<Register> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -180,12 +200,12 @@ class _RegisterState extends State<Register> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -216,12 +236,12 @@ class _RegisterState extends State<Register> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -252,12 +272,12 @@ class _RegisterState extends State<Register> {
                               contentPadding: EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(color: Colors.white),
                               )),
                         ),
@@ -268,7 +288,10 @@ class _RegisterState extends State<Register> {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        signUp(firstname.text, lastname.text, phoneNumber.text, password.text, accountNumber.text, homeAddress.text);
+                        serverResponse();
+                        final snackBar = SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text(responder));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       child: const SizedBox(
