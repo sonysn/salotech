@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  //this function delays snackbar creation time while populating 'responder' from the server
+  //this function delays snackbar creation time while populating 'loginMessage' from the server
   _displaySnackBarAfterServerResponse(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
     final snackBar = SnackBar(
