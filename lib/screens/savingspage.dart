@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/save_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
+import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/screens/homepage.dart';
 
 //This is the page that handles the saving deposit
 
@@ -24,7 +26,7 @@ class _SavingsPageState extends State<SavingsPage> {
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                const SavingsCard(),
+                SavingsCard(globalAmountSaved),
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: Column(
@@ -118,6 +120,7 @@ class _SavingsPageState extends State<SavingsPage> {
                                   top: Radius.circular(20),
                                 )),
                               );
+                              //getTransactionSavingsData();
                             });
                           },
                           child: SizedBox(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//this function delays snackbar creation time while populating 'responder' from the server
+//this function delays snack bar creation time while populating 'responder' from the server
 // displaySnackBarAfterServerResponse(BuildContext context , message) async {
 //   if (message != null) {
 //     await Future.delayed(const Duration(seconds: 2));

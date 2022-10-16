@@ -30,6 +30,10 @@
         trim: true,
         required: true
         },
+      // saveTransactions: {
+      //     type: mongoose.Schema.Types.ObjectId,
+      //     ref: 'userSavings'
+      // },
       salt: String,
       created: {
         type: Date,
@@ -43,6 +47,9 @@
   userSchema.methods = {
     authenticate: function (plainText) {
       return plainText === this.password;
+    },
+    getUserId: function(gus) {
+      return gus === this._id.toString;
     }
   }
   

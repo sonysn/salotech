@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'db_environment.dart';
 
 Future<dynamic> signUp(
     fName, lName, phoneNumber, password, accountNo, String homeAddress) async {
@@ -46,4 +47,18 @@ Future<dynamic> signIn(accountNo, password) async {
   print("${response.statusCode}");
   // print("${response.body}");
   return [message, statusCode] ;
+}
+
+Future<dynamic> getTransactionSavingsData(userID) async {
+  String t = '';
+  //add query parameters
+  var url = Uri.parse('http://192.168.100.43:8080/$userID/getsavings');
+
+  final response = await http.get(url);
+  final message = await jsonDecode(response.body);
+  final messageLength = await message.length;
+  // for (int i = 0; i < messageLength; i++) {}
+  //print(message);
+  return[message, messageLength];
+
 }

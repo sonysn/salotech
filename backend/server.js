@@ -18,6 +18,7 @@ mongoose.connection.on('error', err => {
 
 //bring in routes
 const authRoutes = require('./routes/auth');
+const userSavingsRoutes = require('./routes/user_savings');
 
 //middleware
 app.use(morgan('dev'));
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
 app.use('/', authRoutes);
+app.use('/', userSavingsRoutes);
 
 
 //debug code

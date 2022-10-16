@@ -13,7 +13,7 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
-        height: MediaQuery.of(context).size.height / 1.85,
+        height: MediaQuery.of(context).size.height / 1.15,
         padding:
             const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
         child: ListView(

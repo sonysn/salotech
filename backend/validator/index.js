@@ -29,4 +29,21 @@ exports.userSignupValidator = (req, res, next) => {
     }
     //proceed to next middleware
     next();
+};
+
+
+exports.createSaveTransactionValidator = (req, res, next) => {
+    //check amount and date not null
+
+    req.check('amount', "Amount is required!").notEmpty();
+
+    //check for errors
+    const errors = req.validationErrors();
+    //show first errors as they happen
+    if (errors) {
+        const firstError = errors.map(error => error.msg)[0];
+        return res.status(400).json({ error: firstError });
+    }
+    //proceed to next middleware
+    next();
 }

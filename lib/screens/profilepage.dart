@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/contact_support_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
 import 'package:salotech/Widgets/custom_bottom_navigation.dart';
+import 'package:salotech/screens/homepage.dart';
 
 //This is where the user profile page us found
 
@@ -30,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   'Your Profile',
                   style: TextStyle(fontSize: 20),
                 ),
-                const SavingsCard(),
+                SavingsCard(globalAmountSaved,),
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: Column(

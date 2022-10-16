@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SavingsCard extends StatefulWidget {
-  const SavingsCard({Key? key}) : super(key: key);
+  dynamic amountsaved;
+  SavingsCard(this.amountsaved, {Key? key}) : super(key: key);
 
   @override
   State<SavingsCard> createState() => _SavingsCardState();
@@ -26,11 +27,11 @@ class _SavingsCardState extends State<SavingsCard> {
                         style: TextStyle(color: Colors.white)),
                     Container(
                         margin: const EdgeInsets.only(top: 15),
-                        child: const Text(
-                          'Amount saved',
-                          style: TextStyle(
+                        child: Text(
+                          'N ${widget.amountsaved}',
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 30,
                               color: Colors.white),
                         ))
                   ],

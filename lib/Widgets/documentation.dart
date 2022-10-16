@@ -8,5 +8,5 @@ they includes:
 5. the save bottom pop up
 6. the savings card that displays the user saving through multiple screens
 
-You should see they have describable and distinct names in the files they are called in
+You should see they have describe able and distinct names in the files they are called in
 */

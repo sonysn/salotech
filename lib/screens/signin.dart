@@ -1,5 +1,7 @@
+library globals;
 import 'package:flutter/material.dart';
 import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/screens/bottom_nav.dart';
 import 'package:salotech/screens/homepage.dart';
 //Ths is the login page
 
@@ -9,8 +11,12 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
+//set in global variables
+String globalName = '';
+dynamic globalID, globalSaveTransactions, globalSaveTransactionsListValue;
 
 class _LoginState extends State<Login> {
+
   //function to call signIn function and return a dynamic response
   void _serverResponse() async {
     final res = await signIn(
@@ -23,7 +29,7 @@ class _LoginState extends State<Login> {
         data = res[0];
         loginMessage = res[0]['message'];
       });
-      print(data['token']);
+      //print(data['token']);
     } else {
       //print(res[0]['error']);
       setState(() {
@@ -37,13 +43,34 @@ class _LoginState extends State<Login> {
     print(data);
   }
 
+  //fetch data  from getTransactionSavingsData(globalID)
+  void _getSaveTransactions(val) async {
+    final res = await getTransactionSavingsData(val);
+    dynamic dListNumber = res[1];
+    dynamic dList = res[0];
+    setState(() {
+      globalSaveTransactions = dList;
+      globalSaveTransactionsListValue = dListNumber;
+    });
+    // for (int i = 0; i < globalSaveTransactionsListValue; i++) {
+    //     print(globalSaveTransactions[i]['amount']);
+    //   }
+  }
+
   //makes sure user is logged in before navigation to next screen
   void _nav() async{
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     if (isLoggedIn) {
+      setState(() {
+        globalName = data['user']['firstName'];
+        globalID = data['user']['_id'];
+      });
+      await Future.delayed(const Duration(seconds: 1));
+      _getSaveTransactions(globalID);
       Navigator.push(context, MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomePage(
+            return BottomNavPage(
+              //pass data from server here to next page BottomNavPage which will go to various needed pages
                 firstname: data['user']['firstName'],
                 accountNumber: data['user']['accountNumber']);
           }));
