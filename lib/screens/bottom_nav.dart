@@ -5,11 +5,7 @@ import 'package:salotech/screens/profilepage.dart';
 import 'package:salotech/screens/savingspage.dart';
 
 class BottomNavPage extends StatefulWidget {
-  final String firstname, accountNumber;
-
-  const BottomNavPage(
-      {Key? key, required this.firstname, required this.accountNumber})
-      : super(key: key);
+  const BottomNavPage({Key? key}) : super(key: key);
 
   @override
   State<BottomNavPage> createState() => _BottomNavPageState();

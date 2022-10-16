@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/screens/signin.dart';
 
 class SaveMoney extends StatefulWidget {
   const SaveMoney({Key? key}) : super(key: key);
@@ -8,6 +10,32 @@ class SaveMoney extends StatefulWidget {
 }
 
 class _SaveMoneyState extends State<SaveMoney> {
+  void _serverResponse() async {
+    try {
+      final res = await createTransactionSavingsData(globalID, amountInput.text);
+      if (res[1] == 200) {
+        setState(() {
+          saveMessage = res[0]['message'];
+        });
+      }
+      else {
+        setState(() {
+          saveMessage = res[0]['error'];
+          print(saveMessage);
+        });
+
+      }
+    }
+    catch (e) {
+      setState(() {
+        saveMessage = 'No Internet Connection';
+      });
+    }
+  }
+
+  String saveMessage = '';
+  TextEditingController amountInput = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +43,7 @@ class _SaveMoneyState extends State<SaveMoney> {
       child: Container(
         height: MediaQuery.of(context).size.height / 1.15,
         padding:
-        const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
+            const EdgeInsets.only(bottom: 15, left: 20, right: 20, top: 20),
         child: ListView(
           children: [
             Column(
@@ -23,13 +51,13 @@ class _SaveMoneyState extends State<SaveMoney> {
               children: [
                 Center(
                     child: Card(
-                      elevation: 0,
-                      color: Colors.white,
-                      child: SizedBox(
-                        height: 7,
-                        width: MediaQuery.of(context).size.width / 2.5,
-                      ),
-                    )),
+                  elevation: 0,
+                  color: Colors.white,
+                  child: SizedBox(
+                    height: 7,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                  ),
+                )),
                 Container(
                     margin: const EdgeInsets.only(bottom: 20, top: 20),
                     child: const Text(
@@ -58,11 +86,11 @@ class _SaveMoneyState extends State<SaveMoney> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const TextField(
-                    //controller: phoneNumber,
+                  child: TextField(
+                    controller: amountInput,
                     cursorColor: Colors.white,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Enter Amount (e.g N5000)',
                         contentPadding: EdgeInsets.all(20),
                         enabledBorder: OutlineInputBorder(
@@ -101,7 +129,10 @@ class _SaveMoneyState extends State<SaveMoney> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _serverResponse();
+                        //_displaySnackBarAfterServerResponse(context);
+                      },
                       child: SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width / 2,
@@ -115,6 +146,12 @@ class _SaveMoneyState extends State<SaveMoney> {
                               bottom: Radius.circular(15),
                             ),
                           ))),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(saveMessage),
                 )
               ],
             ),

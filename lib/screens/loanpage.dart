@@ -120,8 +120,6 @@ class _LoanPageState extends State<LoanPage> {
               ],
             ),
           ),
-          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
-          CustomBottomNav(115),
         ],
       ),
     );

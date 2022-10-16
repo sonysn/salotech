@@ -31,7 +31,7 @@ class _SavingsCardState extends State<SavingsCard> {
                           'N ${widget.amountsaved}',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 30,
+                              fontSize: 24,
                               color: Colors.white),
                         ))
                   ],

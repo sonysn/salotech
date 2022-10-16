@@ -5,6 +5,7 @@ import 'package:salotech/screens/savingspage.dart';
 
 import '../screens/profilepage.dart';
 
+//todo this file is not relevant anymore
 class CustomBottomNav extends StatefulWidget {
   double marginValue;
 

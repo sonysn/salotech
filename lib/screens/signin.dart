@@ -1,4 +1,5 @@
 library globals;
+
 import 'package:flutter/material.dart';
 import 'package:salotech/database/dbhandler.dart';
 import 'package:salotech/screens/bottom_nav.dart';
@@ -11,36 +12,43 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
+
 //set in global variables
 String globalName = '';
 dynamic globalID, globalSaveTransactions, globalSaveTransactionsListValue;
 
 class _LoginState extends State<Login> {
-
-  //function to call signIn function and return a dynamic response
+  //function to call signIn function and return a dynamic(any data type) response
   void _serverResponse() async {
-    final res = await signIn(
-        accountNumber.text.toUpperCase(), password.text.toUpperCase());
-    //use status code to display responses
-    if (res[1] == 200) {
-      //print(res[0]['token']);
+    //try and catch handling Connection Failed error
+    try {
+      final res = await signIn(
+          accountNumber.text.toUpperCase(), password.text.toUpperCase());
+      //use status code to display responses
+      if (res[1] == 200) {
+        //print(res[0]['token']);
+        setState(() {
+          isLoggedIn = true;
+          data = res[0];
+          loginMessage = res[0]['message'];
+        });
+        //print(data['token']);
+      } else {
+        //print(res[0]['error']);
+        setState(() {
+          isLoggedIn = false;
+          data = res[0]['error'];
+          loginMessage = data;
+        });
+      }
+      //print(res);
+      print(isLoggedIn);
+      print(data);
+    } catch (e) {
       setState(() {
-        isLoggedIn = true;
-        data = res[0];
-        loginMessage = res[0]['message'];
-      });
-      //print(data['token']);
-    } else {
-      //print(res[0]['error']);
-      setState(() {
-        isLoggedIn = false;
-        data = res[0]['error'];
-        loginMessage = data;
+        loginMessage = 'No Internet Connection';
       });
     }
-    //print(res);
-    print(isLoggedIn);
-    print(data);
   }
 
   //fetch data  from getTransactionSavingsData(globalID)
@@ -58,35 +66,33 @@ class _LoginState extends State<Login> {
   }
 
   //makes sure user is logged in before navigation to next screen
-  void _nav() async{
-    await Future.delayed(const Duration(seconds: 3));
+  void _nav() async {
+    await Future.delayed(const Duration(seconds: 1));
     if (isLoggedIn) {
       setState(() {
         globalName = data['user']['firstName'];
         globalID = data['user']['_id'];
       });
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
       _getSaveTransactions(globalID);
-      Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) {
-            return BottomNavPage(
-              //pass data from server here to next page BottomNavPage which will go to various needed pages
-                firstname: data['user']['firstName'],
-                accountNumber: data['user']['accountNumber']);
-          }));
+      await Future.delayed(const Duration(seconds: 2));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+        return const BottomNavPage();
+      }));
     }
   }
 
-  //this function delays snackbar creation time while populating 'loginMessage' from the server
+  //this function delays snack bar creation time while populating 'loginMessage' from the server
   _displaySnackBarAfterServerResponse(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
     final snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(loginMessage));
+        behavior: SnackBarBehavior.floating, content: Text(loginMessage));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   dynamic data;
+
   //String tokenData = "";
   bool isLoggedIn = false;
   String loginMessage = "";
@@ -116,6 +122,9 @@ class _LoginState extends State<Login> {
                         color: Colors.white,
                       )),
                 ),
+                const Padding(
+                    padding: EdgeInsets.only(left: 12, bottom: 10),
+                    child: Text("Required marked with *")),
                 const Padding(
                   padding: EdgeInsets.only(left: 12),
                   child: Text(

@@ -36,6 +36,7 @@ exports.createSaveTransactionValidator = (req, res, next) => {
     //check amount and date not null
 
     req.check('amount', "Amount is required!").notEmpty();
+    req.check('amount', "Not a Number!").isNumeric();
 
     //check for errors
     const errors = req.validationErrors();

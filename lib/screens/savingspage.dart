@@ -140,8 +140,6 @@ class _SavingsPageState extends State<SavingsPage> {
               ],
             ),
           ),
-          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
-          CustomBottomNav(215),
         ],
       ),
     );

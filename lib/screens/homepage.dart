@@ -1,4 +1,5 @@
 library globals;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -21,6 +22,29 @@ dynamic globalAmountSaved;
 
 class _HomePageState extends State<HomePage> {
   dynamic amountSaved;
+  //hold the icon property and icon colour for the time
+  dynamic timeIcon, timeColour;
+
+  // dynamic _getTimeIcon () {
+  //   final now = DateTime.now();
+  //   //int hour = now.hour;
+  //   int hour = 4;
+  //   String n = "";
+  //   if ((hour >= 0) & (hour <= 11)) {
+  //     setState(() {
+  //       timeIcon = Icons.cloud;
+  //     });
+  //   } else if ((hour >= 12) & (hour <= 17)) {
+  //     setState(() {
+  //       timeIcon = Icons.wb_sunny;
+  //     });
+  //   } else if ((hour >= 18) & (hour <= 23)) {
+  //     setState(() {
+  //       timeIcon = Icons.dark_mode;
+  //     });
+  //   }
+  // }
+
   void _calculate() {
     //to calculate amount saved from savedTransactions list
     List f = [];
@@ -31,11 +55,11 @@ class _HomePageState extends State<HomePage> {
     }
     //adds elements of array together
     sums = f.reduce((value, element) => value + element);
-   print(sums);
-   setState(() {
-     amountSaved = sums;
-     globalAmountSaved = sums.toString();
-   });
+    print(sums);
+    setState(() {
+      amountSaved = sums;
+      globalAmountSaved = sums.toString();
+    });
   }
 
   @override
@@ -44,6 +68,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getTimeString();
     _calculate();
+    setState(() {
+      timeIcon = getTimeIconAndColour()[0];
+      timeColour = getTimeIconAndColour()[1];
+    });
   }
 
   @override
@@ -74,10 +102,10 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const Icon(
+                  Icon(
                     //getTimeIcon(),//TODO
-                    Icons.wb_sunny,
-                    color: Colors.yellow,
+                    timeIcon,
+                    color: timeColour,
                   )
                 ],
               ),
@@ -92,56 +120,58 @@ class _HomePageState extends State<HomePage> {
                   width: 400,
                   height: 430,
                   child: ListView.builder(
-                    itemCount: globals.globalSaveTransactionsListValue,
-                    itemBuilder: (context, index) {
-                    return Card(
-                      child: SizedBox(
-                        height: 100,
-                        width: 400,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Icon(
-                                Icons.add_box_rounded,
-                                color: Colors.blue,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                      itemCount: globals.globalSaveTransactionsListValue,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: SizedBox(
+                            height: 100,
+                            width: 400,
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  const Icon(
+                                    Icons.add_box_rounded,
+                                    color: Colors.blue,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        'Deposit made(Action)',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text('Date')
+                                    ],
+                                  ),
                                   Text(
-                                    'Deposit made(Action)',
-                                    style: TextStyle(
+                                    '${globals.globalSaveTransactions[index]['amount']}',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 16),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text('Date')
+                                        fontSize: 25,
+                                        color: Colors.black),
+                                  )
                                 ],
                               ),
-                              Text(
-                                '${globals.globalSaveTransactions[index]['amount']}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25,
-                                    color: Colors.black),
-                              )
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                      //Activity Card List
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                        bottom: Radius.circular(20),
-                      )),
-                    );
-                  }))
+                          //Activity Card List
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                            bottom: Radius.circular(20),
+                          )),
+                        );
+                      }))
             ],
           ),
         ),

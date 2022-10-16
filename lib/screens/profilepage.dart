@@ -31,7 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   'Your Profile',
                   style: TextStyle(fontSize: 20),
                 ),
-                SavingsCard(globalAmountSaved,),
+                SavingsCard(
+                  globalAmountSaved,
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: Column(
@@ -64,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 30,
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           setState(() {
                             showModalBottomSheet(
                               //Modal bottom sheet controls the menu that shows up from the bottom of the screen TODO
@@ -76,8 +78,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               },
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  )),
+                                top: Radius.circular(20),
+                              )),
                             );
                           });
                         },
@@ -129,8 +131,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          //This here is a custom widget defined in custom_bottom_navigation.dart and the number in the brackets is a margin value
-          CustomBottomNav(105)
         ],
       ),
     );

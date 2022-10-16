@@ -5,7 +5,7 @@ import 'db_environment.dart';
 
 Future<dynamic> signUp(
     fName, lName, phoneNumber, password, accountNo, String homeAddress) async {
-  var url = Uri.parse('http://192.168.100.43:8080/signup');
+  var url = Uri.parse('$envURI/signup');
 
   Map data = {
     'firstName': fName,
@@ -31,7 +31,7 @@ Future<dynamic> signUp(
 }
 
 Future<dynamic> signIn(accountNo, password) async {
-  var url = Uri.parse('http://192.168.100.43:8080/signin');
+  var url = Uri.parse('$envURI/signin');
 
   Map data = {'accountNumber': accountNo, 'password': password};
 
@@ -50,9 +50,8 @@ Future<dynamic> signIn(accountNo, password) async {
 }
 
 Future<dynamic> getTransactionSavingsData(userID) async {
-  String t = '';
   //add query parameters
-  var url = Uri.parse('http://192.168.100.43:8080/$userID/getsavings');
+  var url = Uri.parse('$envURI/$userID/getsavings');
 
   final response = await http.get(url);
   final message = await jsonDecode(response.body);
@@ -61,4 +60,23 @@ Future<dynamic> getTransactionSavingsData(userID) async {
   //print(message);
   return[message, messageLength];
 
+}
+
+Future<dynamic> createTransactionSavingsData(userID, amount) async {
+  var url = Uri.parse('$envURI/createsavetransaction');
+
+  Map data = {'saveTransactionMadeBy': userID, 'amount': amount};
+
+  var body = jsonEncode(data);
+
+  var response = await http.post(url,
+      headers: {"Content-Type": "application/json"}, body: body);
+
+  final message = await jsonDecode(response.body);
+  final statusCode = response.statusCode;
+
+  print("${response.statusCode}");
+  // print("${response.body}");
+  print(message);
+  return [message, statusCode] ;
 }

@@ -13,31 +13,39 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 
   //function to call signUp function and return a dynamic response
-  void _serverResponse() async{
-    final res = await signUp(
-        firstname.text.toUpperCase(),
-        lastname.text.toUpperCase(),
-        phoneNumber.text.toUpperCase(),
-        password.text.toUpperCase(),
-        accountNumber.text.toUpperCase(),
-        homeAddress.text.toUpperCase());
-    //use status code to display responses
-    if (res[1] == 200){
-      setState(() {
-        responder = res[0]['message'];
-      });
+  void _serverResponse() async {
+    //try and catch handling Connection Failed error
+   try {
+      final res = await signUp(
+          firstname.text.toUpperCase(),
+          lastname.text.toUpperCase(),
+          phoneNumber.text.toUpperCase(),
+          password.text.toUpperCase(),
+          accountNumber.text.toUpperCase(),
+          homeAddress.text.toUpperCase());
+      //use status code to display responses
+      if (res[1] == 200){
+        setState(() {
+          responder = res[0]['message'];
+        });
+      }
+      else {
+        setState(() {
+          responder = res[0]['error'];
+        });
+      }
+      print(res);
+      print(responder);
+      //print("$responder + hellooo");
     }
-    else {
-      setState(() {
-        responder = res[0]['error'];
-      });
+    catch (e) {
+     setState(() {
+       responder = 'No Internet Connection';
+     });
     }
-    print(res);
-    print(responder);
-    //print("$responder + hellooo");
   }
 
-  //this function delays snackbar creation time while populating 'responder' from the server
+  //this function delays snack bar creation time while populating 'responder' from the server
   _displaySnackBarAfterServerResponse(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
     final snackBar = SnackBar(
