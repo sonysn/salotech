@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 
 //set in global variables
 String globalName = '';
-dynamic globalID, globalSaveTransactions, globalSaveTransactionsListValue;
+dynamic globalID;
 
 class _LoginState extends State<Login> {
   //function to call signIn function and return a dynamic(any data type) response
@@ -51,20 +51,6 @@ class _LoginState extends State<Login> {
     }
   }
 
-  //fetch data  from getTransactionSavingsData(globalID)
-  void _getSaveTransactions(val) async {
-    final res = await getTransactionSavingsData(val);
-    dynamic dListNumber = res[1];
-    dynamic dList = res[0];
-    setState(() {
-      globalSaveTransactions = dList;
-      globalSaveTransactionsListValue = dListNumber;
-    });
-    // for (int i = 0; i < globalSaveTransactionsListValue; i++) {
-    //     print(globalSaveTransactions[i]['amount']);
-    //   }
-  }
-
   //makes sure user is logged in before navigation to next screen
   void _nav() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -73,8 +59,6 @@ class _LoginState extends State<Login> {
         globalName = data['user']['firstName'];
         globalID = data['user']['_id'];
       });
-      //await Future.delayed(const Duration(seconds: 1));
-      _getSaveTransactions(globalID);
       await Future.delayed(const Duration(seconds: 2));
       Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) {
