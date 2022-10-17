@@ -56,9 +56,10 @@ Future<dynamic> getTransactionSavingsData(userID) async {
   final response = await http.get(url);
   final message = await jsonDecode(response.body);
   final messageLength = await message.length;
+  final statusCode = response.statusCode;
   // for (int i = 0; i < messageLength; i++) {}
   //print(message);
-  return[message, messageLength];
+  return[message, messageLength, statusCode];
 
 }
 
