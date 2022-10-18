@@ -19,6 +19,7 @@ mongoose.connection.on('error', err => {
 //bring in routes
 const authRoutes = require('./routes/auth');
 const userSavingsRoutes = require('./routes/user_savings');
+const transferRoutes = require('./routes/transferFlutter');
 
 //middleware
 app.use(morgan('dev'));
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(expressValidator());
 app.use('/', authRoutes);
 app.use('/', userSavingsRoutes);
+app.use('/', transferRoutes);
 
 
 //debug code

@@ -10,3 +10,4 @@ Installed Services:
 7 - express-validator
 8 - jsonwebtoken
 9 - cookie-parser
+10 - flutterwave-node
