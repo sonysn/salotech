@@ -31,9 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   'Your Profile',
                   style: TextStyle(fontSize: 20),
                 ),
-                SavingsCard(
-                  globalAmountSaved,
-                ),
+                SavingsCard(globalAmountSaved),
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: Column(
