@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   int dataLength = 0;
   var data = [];
 
-  //check if dat is empty
+  //check if data is empty
   void _checkEmpty() {
     if(data.isEmpty){
       setState(() {
@@ -41,16 +41,18 @@ class _HomePageState extends State<HomePage> {
         await Future.delayed(const Duration(seconds: 1));
         //to calculate amount saved from savedTransactions list
         List f = [];
-        int sums;
+        double sums;
 
+        //this for loop adds each item found in data to list f and converts them to a double
         for (int i = 0; i < dataLength; i++) {
-          f.add(data[i]['amount']);
+          f.add(double.parse(data[i]['amount'].toString()));
         }
-        //adds elements of array together
+        //adds elements of list f array together
         sums = f.reduce((value, element) => value + element);
         print(sums);
         setState(() {
-          globalAmountSaved = sums;
+          //setting sum to have 2 decimal places
+          globalAmountSaved = sums.toStringAsFixed(2);
         });
 
       }

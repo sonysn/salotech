@@ -30,10 +30,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _childrenPages,
-      ),
+      body: _childrenPages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onItemTapped,

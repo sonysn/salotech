@@ -4,7 +4,7 @@ import 'package:salotech/Widgets/custom_bottom_navigation.dart';
 import 'package:salotech/Widgets/payback_loan_popup.dart';
 import 'package:salotech/Widgets/request_loan_popup.dart';
 import 'package:salotech/Widgets/savings_card_dashboard.dart';
-import 'homepage.dart' as globals;
+import 'package:salotech/screens/homepage.dart';
 //The request and payback loan page
 
 class LoanPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _LoanPageState extends State<LoanPage> {
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                SavingsCard(globals.globalAmountSaved),
+                SavingsCard(globalAmountSaved),
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: Column(
