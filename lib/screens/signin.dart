@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salotech/database/dbhandler.dart';
 import 'package:salotech/screens/bottom_nav.dart';
 import 'package:salotech/screens/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //Ths is the login page
 
 class Login extends StatefulWidget {
@@ -80,6 +81,7 @@ class _LoginState extends State<Login> {
   //String tokenData = "";
   bool isLoggedIn = false;
   String loginMessage = "";
+  bool checkValue = false;
   TextEditingController password = TextEditingController();
   TextEditingController accountNumber = TextEditingController();
 
@@ -202,6 +204,17 @@ class _LoginState extends State<Login> {
                               bottom: Radius.circular(15),
                             ),
                           ))),
+                ),
+                CheckboxListTile(
+                  title: const Text("Remember me"),
+                  value: checkValue,
+                  onChanged: (newValue) {
+                    setState(() {
+                      checkValue = newValue!;
+                    });
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //  <-- leading Checkbox
                 )
               ],
             ),
