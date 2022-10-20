@@ -19,6 +19,9 @@ exports.userSignupValidator = (req, res, next) => {
     //account number not null
     req.check('accountNumber', "Account Number is required!").notEmpty();
 
+    //check for bank
+    req.check('bank', "Bank is required").notEmpty();
+
 
     //check for errors
     const errors = req.validationErrors();

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'db_environment.dart';
 
 Future<dynamic> signUp(
-    fName, lName, phoneNumber, password, accountNo, String homeAddress) async {
+    fName, lName, phoneNumber, password, accountNo, bank, String homeAddress) async {
   var url = Uri.parse('$envURI/signup');
 
   Map data = {
@@ -13,7 +13,8 @@ Future<dynamic> signUp(
     'phoneNumber': phoneNumber,
     'password': password,
     'homeAddress': homeAddress,
-    'accountNumber': accountNo
+    'accountNumber': accountNo,
+    'bank': bank
   };
   //encode map to json
   var body = jsonEncode(data);
@@ -58,7 +59,7 @@ Future<dynamic> getTransactionSavingsData(userID) async {
   final messageLength = await message.length;
   final statusCode = response.statusCode;
   // for (int i = 0; i < messageLength; i++) {}
-  //print(message);
+  print(message);
   return[message, messageLength, statusCode];
 
 }
@@ -80,4 +81,16 @@ Future<dynamic> createTransactionSavingsData(userID, amount) async {
   // print("${response.body}");
   print(message);
   return [message, statusCode] ;
+}
+
+Future<dynamic> getBankList() async {
+  var url = Uri.parse('$envURI/getbanklist');
+
+  final response = await http.get(url);
+  final message = jsonDecode(response.body);
+  final messageLength = await message.length;
+  //print(message);
+  //get message list length
+  print(messageLength);
+  return [message, messageLength];
 }

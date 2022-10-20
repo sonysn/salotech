@@ -1,11 +1,9 @@
-const User = require("../models/user");
 const userSavings = require('../models/user_savings');
 const ObjectId = require('mongodb').ObjectId;
 
 exports.getSavingsTransactions = async (req, res) => {
     // const getTransaction = await userSavings.find({'saveTransactionMadeBy': ObjectId(req.params.gotUserId)}).populate("saveTransactionMadeBy");
     const getTransaction = await userSavings.find({'saveTransactionMadeBy': ObjectId(req.params.gotUserId)});
-    console.log(req.body.saveTransactionMadeBy);
     res.json(getTransaction);
 };
 

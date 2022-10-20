@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
     //try and catch handling Connection Failed error
     try {
       final res = await signIn(
-          accountNumber.text.toUpperCase(), password.text.toUpperCase());
+          accountNumber.text, password.text);
       //use status code to display responses
       if (res[1] == 200) {
         //print(res[0]['token']);

@@ -178,22 +178,22 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: const [
-                                        Text(
+                                      children: [
+                                        const Text(
                                           'Deposit made(Action)',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
-                                        Text('Date')
+                                        Text('${data[index]['creationDate']}')
                                       ],
                                     ),
                                     Text(
-                                      // todo reverse '${data[dataLength - 1 - index]['amount']}',
-                                      '${data[index]['amount']}',
+                                      '${data[dataLength - 1 - index]['amount']}',
+                                      // todo print oldest to newest '${data[index]['amount']}',
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 25,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salotech/Widgets/snackbar.dart';
 import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/functions/stringcasing.dart';
 
 //This is the register page
 class Register extends StatefulWidget {
@@ -17,12 +18,13 @@ class _RegisterState extends State<Register> {
     //try and catch handling Connection Failed error
    try {
       final res = await signUp(
-          firstname.text.toUpperCase(),
-          lastname.text.toUpperCase(),
-          phoneNumber.text.toUpperCase(),
-          password.text.toUpperCase(),
+          firstname.text.toCapitalized(),
+          lastname.text.toCapitalized(),
+          phoneNumber.text,
+          password.text,
           accountNumber.text.toUpperCase(),
-          homeAddress.text.toUpperCase());
+          selectDropDown,
+          homeAddress.text.toCapitalized());
       //use status code to display responses
       if (res[1] == 200){
         setState(() {
@@ -54,6 +56,26 @@ class _RegisterState extends State<Register> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  //read from banks list data, extract names to bank list data names
+ void _readBankList(){
+   var banks = [];
+    for (int i = 0; i < getBankListLength; i++){
+      banks.add(bankListData[i]['name']);
+    }
+    setState(() {
+      bankListDataNames = banks;
+    });
+ }
+
+ void _serverGetResponseBankList() async {
+    final res = await getBankList();
+    setState(() {
+      bankListData = res[0];
+      getBankListLength = res[1];
+    });
+    _readBankList();
+ }
+
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
@@ -62,7 +84,19 @@ class _RegisterState extends State<Register> {
   TextEditingController accountNumber = TextEditingController();
   TextEditingController homeAddress = TextEditingController();
   dynamic responder;
+  int getBankListLength = 0;
+  var bankListData = [];
+  var bankListDataNames = [];
+  List<DropdownMenuItem> bankList = [];
+  dynamic selectDropDown;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _serverGetResponseBankList();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,6 +306,44 @@ class _RegisterState extends State<Register> {
                         ),
                       ],
                     )),
+                const Padding(
+                  padding: EdgeInsets.only(left: 12),
+                  child: Text(
+                    'Bank *',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 27,
+                        color: Colors.white),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  child: DropdownButtonFormField(
+                    value: selectDropDown,
+                    //map through this list
+                    items: bankListDataNames.map((itemOne) {
+                        return DropdownMenuItem(
+                        value: itemOne,
+                        child: Text(itemOne)
+                        );
+                    }).toList(),
+                    isExpanded: true,
+                    onChanged: (value){
+                      selectDropDown = value;
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'Select Bank',
+                        contentPadding: EdgeInsets.all(20),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderSide: BorderSide(color: Colors.white),
+                        )),
+                  ),
+                ),
                 //home address input
                 const Padding(
                   padding: EdgeInsets.only(left: 12),

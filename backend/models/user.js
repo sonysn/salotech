@@ -30,11 +30,11 @@
         trim: true,
         required: true
         },
-      // saveTransactions: {
-      //     type: mongoose.Schema.Types.ObjectId,
-      //     ref: 'userSavings'
-      // },
-      salt: String,
+      bank: {
+        type: String,
+        trim: true,
+        required: true
+      },
       created: {
         type: Date,
         default: Date.now
