@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/screens/signin.dart';
 
 class RequestLoanPopUp extends StatefulWidget {
   const RequestLoanPopUp({Key? key}) : super(key: key);
@@ -8,6 +10,33 @@ class RequestLoanPopUp extends StatefulWidget {
 }
 
 class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
+  void _serverResponse() async {
+    try {
+      final res = await createLoanRequest(globalID, amountInput.text, globalName + " " + globalLastName, description.text);
+      if (res[1] == 200) {
+        setState(() {
+          requestLoanMessage = res[0]['message'];
+        });
+      }
+      else {
+        setState(() {
+          requestLoanMessage = res[0]['error'];
+          print(requestLoanMessage);
+        });
+
+      }
+    }
+    catch (e) {
+      setState(() {
+        requestLoanMessage = 'No Internet Connection';
+      });
+    }
+  }
+
+  TextEditingController amountInput = TextEditingController();
+  TextEditingController description = TextEditingController();
+  String requestLoanMessage = '';
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,11 +87,11 @@ class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const TextField(
-                    //controller: phoneNumber,
+                  child: TextField(
+                    controller: amountInput,
                     cursorColor: Colors.white,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Enter Amount (e.g N5000)',
                         contentPadding: EdgeInsets.all(20),
                         enabledBorder: OutlineInputBorder(
@@ -84,13 +113,13 @@ class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const TextField(
-                    //controller: phoneNumber,
+                  child: TextField(
+                    controller: description,
                     maxLines: 4,
                     maxLength: 120,
                     cursorColor: Colors.white,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Reason For the loan?',
                         contentPadding: EdgeInsets.all(20),
                         enabledBorder: OutlineInputBorder(
@@ -105,7 +134,9 @@ class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _serverResponse();
+                      },
                       child: SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width / 2,
@@ -119,6 +150,12 @@ class _RequestLoanPopUpState extends State<RequestLoanPopUp> {
                               bottom: Radius.circular(15),
                             ),
                           ))),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(requestLoanMessage),
                 )
               ],
             ),

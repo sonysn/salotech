@@ -15,6 +15,7 @@ class Login extends StatefulWidget {
 
 //set in global variables
 String globalName = '';
+String globalLastName = '';
 dynamic globalID;
 
 class _LoginState extends State<Login> {
@@ -58,6 +59,7 @@ class _LoginState extends State<Login> {
       setState(() {
         globalName = data['user']['firstName'];
         globalID = data['user']['_id'];
+        globalLastName = data['user']['lastName'];
       });
       await Future.delayed(const Duration(seconds: 2));
       Navigator.push(context,

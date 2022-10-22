@@ -20,6 +20,8 @@ mongoose.connection.on('error', err => {
 const authRoutes = require('./routes/auth');
 const userSavingsRoutes = require('./routes/user_savings');
 const BankRoutes = require('./routes/BankList');
+const requestLoanRoutes = require('./routes/requestloan');
+const paybackLoanRoutes = require('./routes/paybackloan');
 
 //middleware
 app.use(morgan('dev'));
@@ -29,6 +31,8 @@ app.use(expressValidator());
 app.use('/', authRoutes);
 app.use('/', userSavingsRoutes);
 app.use('/', BankRoutes);
+app.use('/', requestLoanRoutes);
+app.use('/', paybackLoanRoutes);
 
 
 //debug code

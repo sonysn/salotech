@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
     catch(e){
-      _load();
+      _refresh();
     }
   }
 
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   //reload whole process all over
-  Future _load() async {
+  Future _refresh() async {
     _getData();
     _calculate();
     _checkEmpty();
@@ -115,11 +115,11 @@ class _HomePageState extends State<HomePage> {
       //creates a blue a background colour
       backgroundColor: Colors.blue[200],
       body: RefreshIndicator(
-        onRefresh: _load,
+        onRefresh: _refresh,
         child: ListView(children: [
           Container(
             padding: const EdgeInsets.only(top: 35),
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     const Icon(
-                                      Icons.add_box_rounded,
+                                      Icons.add,
                                       color: Colors.blue,
                                     ),
                                     Column(
@@ -179,16 +179,16 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          'Deposit made(Action)',
-                                          style: TextStyle(
+                                        Text(
+                                          '${data[dataLength - 1 - index]['title']}',
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16),
                                         ),
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Text('${data[index]['creationDate']}')
+                                        Text('${data[dataLength - 1 - index]['creationDate']}')
                                       ],
                                     ),
                                     Text(

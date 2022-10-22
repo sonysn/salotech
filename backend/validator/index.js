@@ -51,3 +51,40 @@ exports.createSaveTransactionValidator = (req, res, next) => {
     //proceed to next middleware
     next();
 }
+
+exports.requestLoanValidator = (req, res, next) => {
+     //check amount not null
+
+     req.check('amount', "Amount is required!").notEmpty();
+     req.check('amount', "Not a Number!").isNumeric();
+
+     req.check('description', "Description is required").notEmpty();
+ 
+     //check for errors
+     const errors = req.validationErrors();
+     //show first errors as they happen
+     if (errors) {
+         const firstError = errors.map(error => error.msg)[0];
+         return res.status(400).json({ error: firstError });
+     }
+     //proceed to next middleware
+     next();
+}
+
+exports.paybackLoanValidator = (req, res, next) => {
+    //check amount not null
+
+    req.check('amount', "Amount is required!").notEmpty();
+    req.check('amount', "Not a Number!").isNumeric();
+
+
+    //check for errors
+    const errors = req.validationErrors();
+    //show first errors as they happen
+    if (errors) {
+        const firstError = errors.map(error => error.msg)[0];
+        return res.status(400).json({ error: firstError });
+    }
+    //proceed to next middleware
+    next();
+}

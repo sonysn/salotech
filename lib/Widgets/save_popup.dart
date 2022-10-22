@@ -12,7 +12,7 @@ class SaveMoney extends StatefulWidget {
 class _SaveMoneyState extends State<SaveMoney> {
   void _serverResponse() async {
     try {
-      final res = await createTransactionSavingsData(globalID, amountInput.text);
+      final res = await createTransactionSavingsData(globalID, amountInput.text, globalName + " " + globalLastName);
       if (res[1] == 200) {
         setState(() {
           saveMessage = res[0]['message'];

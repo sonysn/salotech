@@ -1,23 +1,27 @@
 const mongoose = require('mongoose');
 
-const userSavingsSchema = new mongoose.Schema({
+const paybackLoanSchema = new mongoose.Schema({
     title: {
         type: String,
-        default: 'Save Deposit'
+        default: 'Paidback Loan'
     },
     amount: {
         type: Number,
         trim: true,
         required: true
     },
-    saveTransactionMadeBy: {
+    paybackLoanMadeBy: {
         type: String,
-        required: true,
-        immutable: true
+        required: true
     },
-    saveTransactionMadeByID: {
+    paybackLoanMadeByID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
+    },
+    requestLoanIDRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserRequestLoan'
     },
     creationDate: {
         type: Date,
@@ -29,4 +33,4 @@ const userSavingsSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('userSavings', userSavingsSchema);
+module.exports = mongoose.model('UserPaybackLoan', paybackLoanSchema);

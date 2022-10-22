@@ -1,13 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:salotech/database/dbhandler.dart';
+import 'package:salotech/screens/signin.dart';
 
 class PayBackLoanPopUp extends StatefulWidget {
-  const PayBackLoanPopUp({Key? key}) : super(key: key);
+  //this id is coming from viewloanandpayback.dart file
+  String id;
+  PayBackLoanPopUp({required this.id, Key? key}) : super(key: key);
 
   @override
   State<PayBackLoanPopUp> createState() => _PayBackLoanPopUpState();
 }
 
 class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
+
+  void _serverResponse() async {
+    try {
+      final res = await createPaybackLoan(globalID, widget.id, amountInput.text, globalName + " " + globalLastName);
+      if (res[1] == 200) {
+        setState(() {
+          paybackLoanMessage = res[0]['message'];
+        });
+      }
+      else {
+        setState(() {
+          paybackLoanMessage = res[0]['error'];
+          print(paybackLoanMessage);
+        });
+
+      }
+    }
+    catch (e) {
+      setState(() {
+        paybackLoanMessage = 'No Internet Connection';
+      });
+    }
+  }
+
+  TextEditingController amountInput = TextEditingController();
+  String paybackLoanMessage ='';
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,11 +89,11 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const TextField(
-                    //controller: phoneNumber,
+                  child: TextField(
+                    controller: amountInput,
                     cursorColor: Colors.white,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Enter Amount (e.g N5000)',
                         contentPadding: EdgeInsets.all(20),
                         enabledBorder: OutlineInputBorder(
@@ -101,7 +132,9 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _serverResponse();
+                      },
                       child: SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width / 2,
@@ -115,6 +148,12 @@ class _PayBackLoanPopUpState extends State<PayBackLoanPopUp> {
                               bottom: Radius.circular(15),
                             ),
                           ))),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(paybackLoanMessage),
                 )
               ],
             ),

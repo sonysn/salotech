@@ -23,7 +23,7 @@ class _SavingsPageState extends State<SavingsPage> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 35),
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 SavingsCard(globalAmountSaved),
